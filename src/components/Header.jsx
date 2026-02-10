@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, Compass, LayoutGrid, Info } from 'lucide-react';
 import './Header.css';
 
 const Header = () => {
@@ -11,9 +11,9 @@ const Header = () => {
   const itemsRef = useRef({});
 
   const navItems = [
-    { path: '/', label: 'Descobrir' },
-    { path: '/browse', label: 'Navegar' },
-    { path: '/about', label: 'Sobre' }
+    { path: '/', label: 'Descobrir', icon: Compass },
+    { path: '/browse', label: 'Navegar', icon: LayoutGrid },
+    { path: '/about', label: 'Sobre', icon: Info }
   ];
 
   useEffect(() => {
@@ -49,16 +49,20 @@ const Header = () => {
             }}
           ></div>
 
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              ref={el => itemsRef.current[item.path] = el}
-              className={`nav-item ${isActive(item.path)}`}
-            >
-              <span>{item.label}</span>
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                ref={el => itemsRef.current[item.path] = el}
+                className={`nav-item ${isActive(item.path)}`}
+              >
+                <Icon size={18} className="nav-icon" />
+                <span className="nav-label">{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="header-actions">

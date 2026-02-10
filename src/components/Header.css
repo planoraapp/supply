@@ -21,8 +21,7 @@
     height: 56px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     width: 100%;
-    max-width: 520px;
-    /* Reduced from 650px to better fit 3 items */
+    max-width: 580px;
 }
 
 /* Adjust for larger screens */
@@ -36,8 +35,9 @@
 .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-right: 4px;
+    justify-content: flex-start;
+    flex: 1;
+    /* Take equal space as header-actions to center nav */
 }
 
 .logo-img {
@@ -57,21 +57,32 @@
     height: 44px;
     height: 44px;
     justify-content: center;
+    flex: 2;
+    /* Take core space */
 }
 
 .nav-item {
     position: relative;
     z-index: 2;
-    padding: 8px 20px;
-    /* Increased horizontal padding */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
     border-radius: 24px;
     font-size: 14px;
     font-weight: 500;
     color: var(--text-secondary);
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
-    display: flex;
-    align-items: center;
+}
+
+.nav-icon {
+    flex-shrink: 0;
+}
+
+.nav-label {
+    transition: width 0.3s, opacity 0.3s, margin 0.3s;
+    overflow: hidden;
 }
 
 .nav-item.active {
@@ -98,6 +109,9 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    /* Take equal space as logo */
 }
 
 .icon-btn {
@@ -129,14 +143,36 @@
 }
 
 /* Mobile responsive adjustments */
-@media (max-width: 600px) {
-    .nav-links {
-        display: none;
-        /* Hide standard nav on mobile, use menu */
+@media (max-width: 650px) {
+    .header-content {
+        padding: 6px;
+        gap: 8px;
     }
 
-    .header-content {
-        justify-content: space-between;
-        max-width: 100%;
+    .logo-img {
+        padding-left: 8px;
+        height: 18px;
+    }
+
+    .nav-label {
+        display: none;
+    }
+
+    .nav-item.active .nav-label {
+        display: inline-block;
+        margin-left: 4px;
+    }
+
+    .nav-item {
+        padding: 8px 12px;
+    }
+
+    .nav-item.active {
+        padding: 8px 16px;
+    }
+
+    .icon-btn {
+        width: 38px;
+        height: 38px;
     }
 }

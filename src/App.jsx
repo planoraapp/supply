@@ -28,13 +28,8 @@ const Footer = () => (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <a href="/about" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Sobre</a>
           <a href="/legal" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Legal</a>
-        </div>
-      </div>
-      <div>
-        <h4 style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px', textTransform: 'uppercase' }}>Contato</h4>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Twitter</a>
-          <a href="mailto:hey@curated.supply" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Email</a>
+          <a href="https://x.com/mtheusroque" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Twitter</a>
+          <a href="mailto:appplanora@gmail.com" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Email</a>
         </div>
       </div>
       <div>

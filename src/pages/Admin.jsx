@@ -311,7 +311,7 @@ const Admin = () => {
                     </section>
 
                     <section className="admin-section">
-                        <h2>Preview</h2>
+                        <h2>Prévia</h2>
                         <div className="preview-card-compact">
                             <div className="preview-image">
                                 {product.image ? (

@@ -11,17 +11,12 @@
     position: relative;
 }
 
-.product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    /* Stronger shadow on hover */
-}
 
 .product-image-container {
     width: 100%;
     aspect-ratio: 1 / 1;
     /* Square images as per layout */
-    background-color: var(--pill-bg-inactive);
+    background-color: #f9f9f9;
     /* Fallback */
     overflow: hidden;
     position: relative;
@@ -62,7 +57,7 @@
 }
 
 .product-card:hover .product-image {
-    transform: scale(1.05);
+    transform: translateY(-8px);
 }
 
 .product-details {

@@ -7,34 +7,34 @@ const Legal = () => {
             <div className="legal-content">
                 <header className="legal-header">
                     <h1>Legal</h1>
-                    <p className="last-updated">Last updated: February 2026</p>
+                    <p className="last-updated">Última atualização: Fevereiro de 2026</p>
                 </header>
 
                 <section className="legal-sections">
-                    <p>By accessing or using Acervo., you agree to comply with and be bound by the following Terms and Conditions. Please read them carefully before using the site.</p>
+                    <p>Ao acessar ou usar o acervo., você concorda em cumprir e estar vinculado aos seguintes Termos e Condições. Leia-os atentamente antes de usar o site.</p>
 
-                    <h5>Affiliate Disclosure</h5>
-                    <p>Some links featured on Acervo. are affiliate links. This means we may earn a commission if you click on a link and make a purchase, at no additional cost to you. These commissions help support the ongoing operation of the site and allow us to continue sourcing and curating high-quality products for our audience. Our editorial content is never influenced by affiliate partnerships, and all recommendations are based on design quality, function, and relevance. As an Amazon Associate, we earn from qualifying purchases.</p>
+                    <h5>Divulgação de Afiliados</h5>
+                    <p>Alguns links apresentados no acervo. são links de afiliados. Isso significa que podemos ganhar uma comissão se você clicar em um link e fizer uma compra, sem custo adicional para você. Essas comissões ajudam a apoiar a operação contínua do site e nos permitem continuar buscando e selecionando produtos de alta qualidade para nosso público. Nosso conteúdo editorial nunca é influenciado por parcerias de afiliados, e todas as recomendações são baseadas em qualidade de design, função e relevância. Como um Associado da Amazon, ganhamos com compras qualificadas.</p>
 
-                    <h5>Third-Party Products and Retailers</h5>
-                    <p>Acervo. does not manufacture, sell, store, or ship any products listed on this site. All transactions are conducted directly with independent third-party retailers or manufacturers. We have no control over, and accept no responsibility for, the quality, accuracy, availability, legality, or safety of products or services offered by these parties. Any concerns regarding product specifications, shipping times, returns, refunds, or warranties must be addressed directly with the relevant retailer or manufacturer.</p>
+                    <h5>Produtos e Varejistas de Terceiros</h5>
+                    <p>O acervo. não fabrica, vende, armazena ou envia nenhum dos produtos listados neste site. Todas as transações são realizadas diretamente com varejistas ou fabricantes terceiros independentes. Não temos controle e não aceitamos responsabilidade pela qualidade, precisão, disponibilidade, legalidade ou segurança de produtos ou serviços oferecidos por essas partes. Quaisquer preocupações relacionadas às especificações do produto, tempos de envio, devoluções, reembolsos ou garantias devem ser tratadas diretamente com o varejista ou fabricante relevante.</p>
 
-                    <h5>Content Ownership</h5>
-                    <p>All text, imagery, graphics, and design on Acervo. are the property of Acervo. or its content providers and are protected by international copyright and intellectual property laws. Content may not be reproduced, distributed, transmitted, or otherwise used for commercial purposes without prior written permission.</p>
+                    <h5>Propriedade do Conteúdo</h5>
+                    <p>Todo o texto, imagens, gráficos e design no acervo. são de propriedade do acervo. ou de seus provedores de conteúdo e são protegidos por leis internacionais de direitos autorais e propriedade intelectual. O conteúdo não pode ser reproduzido, distribuído, transmitido ou usado para fins comerciais sem permissão prévia por escrito.</p>
 
-                    <h5>Accuracy and Availability</h5>
-                    <p>While every effort is made to ensure that product details, pricing, and availability are accurate at the time of publication, we cannot guarantee that this information will always remain current. Products may be updated, discontinued, or change in price without notice.</p>
+                    <h5>Precisão e Disponibilidade</h5>
+                    <p>Embora todos os esforços sejam feitos para garantir que os detalhes do produto, preços e disponibilidade sejam precisos no momento da publicação, não podemos garantir que essas informações permaneçam sempre atualizadas. Os produtos podem ser atualizados, descontinuados ou sofrer alteração de preço sem aviso prévio.</p>
 
-                    <h5>Limitations of Liability</h5>
-                    <p>Acervo. is not responsible for any direct, indirect, incidental, or consequential loss or damage that may result from the use of this website, the reliance on any information provided, or the inability to access or use the site. This includes, but is not limited to, loss of data, business interruption, or financial loss.</p>
+                    <h5>Limitações de Responsabilidade</h5>
+                    <p>O acervo. não é responsável por qualquer perda ou dano direto, indireto, incidental ou consequente que possa resultar do uso deste site, da confiança em qualquer informação fornecida ou da incapacidade de acessar ou usar o site. Isso inclui, mas não se limita a, perda de dados, interrupção de negócios ou perda financeira.</p>
 
-                    <h5>Law and Jurisdiction</h5>
-                    <p>These Terms are governed by and interpreted in accordance with the laws of Malta, without regard to conflict of law provisions. By using the site, you agree that any disputes will be resolved exclusively in the courts of Malta.</p>
+                    <h5>Lei e Jurisdição</h5>
+                    <p>Estes Termos são regidos e interpretados de acordo com as leis do Brasil, sem considerar as disposições sobre conflitos de leis. Ao usar o site, você concorda que quaisquer disputas serão resolvidas exclusivamente nos tribunais brasileiros.</p>
 
-                    <h5>Changes to These Terms</h5>
-                    <p>We may update these Terms and Conditions at any time. Any changes will be posted on this page, and continued use of the site after such changes have been posted will constitute acceptance of the revised terms.</p>
+                    <h5>Alterações nestes Termos</h5>
+                    <p>Podemos atualizar estes Termos e Condições a qualquer momento. Quaisquer alterações serão postadas nesta página, e o uso continuado do site após a postagem de tais alterações constituirá a aceitação dos termos revisados.</p>
 
-                    <p>For any questions, feedback, or concerns, please contact us at <a href="mailto:appplanora@gmail.com">appplanora@gmail.com</a> or use the <a href="/about#contact">contact form</a> on our website.</p>
+                    <p>Para quaisquer dúvidas, feedbacks ou preocupações, entre em contato conosco pelo e-mail <a href="mailto:appplanora@gmail.com">appplanora@gmail.com</a> ou use o <a href="/about#contact">formulário de contato</a> em nosso site.</p>
                 </section>
             </div>
         </div>

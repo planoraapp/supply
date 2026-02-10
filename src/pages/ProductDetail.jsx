@@ -55,7 +55,7 @@ const ProductDetail = () => {
                         <div className="product-price">{product.price}</div>
                         <div className="actions-divider"></div>
                         <a href={product.url} target="_blank" rel="noopener noreferrer" className="purchase-button">
-                            <span>Purchase Link</span>
+                            <span>Link de Compra</span>
                             <ExternalLink size={14} />
                         </a>
                     </div>
@@ -71,7 +71,7 @@ const ProductDetail = () => {
             <div className="product-content">
                 <div className="product-details-grid">
                     <div className="details-col">
-                        <h3 className="section-label">About</h3>
+                        <h3 className="section-label">Sobre</h3>
                         <div className="about-text">
                             {product.about ? (
                                 <p>{product.about}</p>
@@ -90,10 +90,10 @@ const ProductDetail = () => {
             <section className="related-section">
                 <div className="section-header">
                     <div className="header-titles">
-                        <span className="label">More in</span>
+                        <span className="label">Mais em</span>
                         <h2 className="title">{product.category}</h2>
                     </div>
-                    <Link to={`/categories/${product.category?.toLowerCase()}`} className="see-all">See all</Link>
+                    <Link to={`/categories/${product.category?.toLowerCase()}`} className="see-all">Ver todos</Link>
                 </div>
 
                 <div className="product-grid">
@@ -123,8 +123,8 @@ const ProductDetail = () => {
 
             <section className="featured-lists-section">
                 <div className="section-header">
-                    <h2 className="title">Featured in</h2>
-                    <Link to="/lists" className="see-all">See all</Link>
+                    <h2 className="title">Aparece em</h2>
+                    <Link to="/lists" className="see-all">Ver todos</Link>
                 </div>
 
                 <div className="lists-grid-detail">

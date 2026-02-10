@@ -181,8 +181,7 @@
 }
 
 .product-card-related:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    /* Keep card static */
 }
 
 .related-image-container {
@@ -200,6 +199,11 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card-related:hover .related-image-container img {
+    transform: translateY(-8px);
 }
 
 .related-meta {
@@ -259,7 +263,12 @@
 }
 
 .list-card-detail:hover {
-    background: #fafafa;
+    background: #fff;
+    border-color: var(--text-primary);
+}
+
+.list-card-detail:hover .list-image-detail img {
+    transform: translateY(-4px);
 }
 
 .list-image-detail {
@@ -277,6 +286,7 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .list-name-detail {

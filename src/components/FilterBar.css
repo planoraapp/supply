@@ -34,6 +34,17 @@
     font-weight: 500;
     transition: all 0.2s ease;
     white-space: nowrap;
+    gap: 8px;
+}
+
+.filter-icon {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.filter-pill.active .filter-icon,
+.filter-pill:hover .filter-icon {
+    opacity: 1;
 }
 
 .filter-pill.active {

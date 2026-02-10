@@ -17,21 +17,19 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 9999px;
-    padding: 6px 12px;
+    padding: 6px 8px;
     height: 56px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     width: 100%;
-    max-width: 500px;
-    /* On desktop it looks central and contained */
+    max-width: 520px;
+    /* Reduced from 650px to better fit 3 items */
 }
 
-/* Adjust for larger screens if needed */
+/* Adjust for larger screens */
 @media (min-width: 768px) {
     .header-content {
-        justify-content: space-between;
-        width: auto;
-        gap: 24px;
-        padding: 6px 6px;
+        gap: 20px;
+        padding: 6px 8px;
     }
 }
 
@@ -39,20 +37,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: #f2f2f2;
-    /* Placeholder logo color */
-    border-radius: 50%;
     margin-right: 4px;
 }
 
-.logo-icon {
-    width: 20px;
-    height: 20px;
-    background: #000;
-    /* Placeholder icon */
-    border-radius: 4px;
+.logo-img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+    padding-left: 12px;
 }
 
 .nav-links {
@@ -63,24 +55,39 @@
     padding: 4px;
     position: relative;
     height: 44px;
+    height: 44px;
+    justify-content: center;
 }
 
 .nav-item {
     position: relative;
     z-index: 2;
-    padding: 8px 16px;
+    padding: 8px 20px;
+    /* Increased horizontal padding */
     border-radius: 24px;
     font-size: 14px;
     font-weight: 500;
     color: var(--text-secondary);
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .nav-item.active {
     color: var(--text-primary);
+}
+
+.nav-active-pill {
+    position: absolute;
+    height: 36px;
+    top: 4px;
+    left: 0;
     background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
 }
 
 .nav-item:hover {

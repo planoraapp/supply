@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import About from './pages/About';
 import Browse from './pages/Browse';
+import Admin from './pages/Admin';
 import './index.css';
 
 const Footer = () => (
@@ -24,7 +25,6 @@ const Footer = () => (
         <h4 style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px', textTransform: 'uppercase' }}>Info</h4>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <a href="/about" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Sobre</a>
-          <a href="/blog" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Blog</a>
           <a href="/legal" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Legal</a>
         </div>
       </div>
@@ -73,7 +73,7 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/about" element={<About />} />
-        {/* Add other routes like /blog or /about here which can just be placeholders for now */}
+        <Route path="/inserir" element={<Admin />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />

@@ -1,108 +1,8 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { getLists } from '../data';
 import './Browse.css';
-
-const lists = [
-    {
-        name: 'Home Office Goals',
-        count: 68,
-        slug: 'office-goals',
-        images: [
-            'https://assets.curated.supply/studio%20display.webp',
-            'https://assets.curated.supply/aeron.webp',
-            'https://assets.curated.supply/Work Louder_k%E2%80%A2no%E2%80%A2b%E2%80%A21.webp',
-            'https://assets.curated.supply/Kismas_Doric%20Lamp%2001.webp'
-        ]
-    },
-    {
-        name: 'Cult of Coffee',
-        count: 33,
-        slug: 'cult-of-coffee',
-        images: [
-            'https://assets.curated.supply/fellow_stagg.webp',
-            'https://assets.curated.supply/xbloomstudio.webp',
-            'https://assets.curated.supply/Terra%20Kaffe_TK-02.webp',
-            'https://assets.curated.supply/Fellow%20Ode%20Brew%20Grinder%20Gen%202.webp'
-        ]
-    },
-    {
-        name: 'For Your Coffee Table',
-        count: 41,
-        slug: 'coffee-table',
-        images: [
-            'https://assets.curated.supply/Phaidon_Dieter%20Rams_%20The%20Complete%20Works.webp',
-            'https://assets.curated.supply/Taschen_Virgil%20Abloh.%20Nike.%20ICONS.webp',
-            'https://assets.curated.supply/Phaidon_Braun_%20Designed%20to%20Keep.webp',
-            'https://assets.curated.supply/Taschen_Design%20of%20the%2020th%20Century.webp'
-        ]
-    },
-    {
-        name: 'Audiophile Core',
-        count: 72,
-        slug: 'audiophile',
-        images: [
-            'https://assets.curated.supply/Nothing_Headphones(1).webp',
-            'https://assets.curated.supply/airpods%20max.webp',
-            'https://assets.curated.supply/BangOlufsen_Beosound%20Level.webp',
-            'https://assets.curated.supply/BangOlufsen_Beosound%20A1%203rd%20Gen.webp'
-        ]
-    },
-    {
-        name: 'Even Charging can Look Good',
-        count: 56,
-        slug: 'charging',
-        images: [
-            'https://assets.curated.supply/Nomad_%20Base%20One%20Max%203-in-1.webp',
-            'https://assets.curated.supply/Aulumu_M01%204-in-1%20Folding%20Wireless%20Charging%20Station%20%26%20Pad.webp',
-            'https://assets.curated.supply/Native Union_Rise%203-in-1%20Magnetic%20Wireless%20Charger.webp',
-            'https://assets.curated.supply/Courant_CATCH_3%20Classics.webp'
-        ]
-    },
-    {
-        name: 'Nicer Everyday Objects',
-        count: 93,
-        slug: 'everyday',
-        images: [
-            'https://assets.curated.supply/Crust_P%E2%80%931%20Pepper%20Mill.webp',
-            'https://assets.curated.supply/Aesop%20Polish%20Bar.webp',
-            'https://assets.curated.supply/Dyson%20v15.webp',
-            'https://assets.curated.supply/Elago_Magnetic%20Leather%20Card%20Holder.webp'
-        ]
-    },
-    {
-        name: 'Deskworthy',
-        count: 141,
-        slug: 'deskworthy',
-        images: [
-            'https://assets.curated.supply/Nomad_%20Base%20One%20Max%203-in-1.webp',
-            'https://assets.curated.supply/Lofree_%20Flow%202.webp',
-            'https://assets.curated.supply/Lofree_%20Flow%2084.webp',
-            'https://assets.curated.supply/Native Union_Rise%203-in-1%20Magnetic%20Wireless%20Charger.webp'
-        ]
-    },
-    {
-        name: 'Athletes Only',
-        count: 32,
-        slug: 'athletes',
-        images: [
-            'https://assets.curated.supply/Killspencer_Indoor%20Mini%20Basketball%20Kit.webp',
-            'https://assets.curated.supply/Killspencer_Soccer%20Ball.webp',
-            'https://assets.curated.supply/Killspencer_Indoor%20Mini%20Basketball.webp',
-            'https://assets.curated.supply/Adidas_Copa%20Mundial.webp'
-        ]
-    },
-    {
-        name: 'Leather Goods',
-        count: 75,
-        slug: 'leather',
-        images: [
-            'https://assets.curated.supply/Grams28_151%20Stealth%20Backpack.webp',
-            'https://assets.curated.supply/Bellroy_Hide%20%26%20Seek.webp',
-            'https://assets.curated.supply/Courant_CATCH_3%20Classics.webp',
-            'https://assets.curated.supply/Hardgraft_Long%20Haul%20Briefcase.webp'
-        ]
-    }
-];
 
 const categories = [
     { name: 'Tech', image: 'https://assets.curated.supply/studio%20display.webp', count: 179 },
@@ -127,30 +27,51 @@ const brands = [
 ];
 
 const Browse = () => {
+    const [lists, setLists] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchLists = async () => {
+            const data = await getLists();
+            setLists(data);
+            setLoading(false);
+        };
+        fetchLists();
+    }, []);
+
+    if (loading) {
+        return <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>Carregando dados...</div>;
+    }
     return (
         <div className="container browse-page">
             <h1 className="browse-title">Navegar</h1>
 
             <section className="browse-section">
-                <div className="section-header">
-                    <h2>Por lista</h2>
-                    <a href="/lists" className="see-all">Ver tudo</a>
+                <div className="section-header" style={{ marginBottom: '24px' }}>
+                    <h4 style={{ fontSize: '14px', color: 'var(--text-secondary)', textTransform: 'uppercase', margin: 0 }}>Listas</h4>
+                    <Link to="/lists" className="see-all" style={{ textDecoration: 'none', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '0.05em' }}>Ver tudo</Link>
                 </div>
                 <div className="browse-grid lists-grid">
                     {lists.map((list, index) => (
-                        <a href={`/lists/${list.slug}`} key={index} className="browse-card list-card">
+                        <Link to={`/lists/${list.slug || list.id}`} key={index} className="browse-card list-card">
                             <div className="list-images-grid">
-                                {list.images.map((img, i) => (
-                                    <div key={i} className="list-image-item">
-                                        <img src={img} alt="" loading="lazy" />
-                                    </div>
-                                ))}
+                                {(list.images && list.images.length > 0) ? (
+                                    list.images.slice(0, 4).map((img, i) => (
+                                        <div key={i} className="list-image-item">
+                                            <img src={img} alt="" loading="lazy" />
+                                        </div>
+                                    ))
+                                ) : (
+                                    Array(4).fill(0).map((_, i) => (
+                                        <div key={i} className="list-image-item" style={{ background: '#f5f5f5' }}></div>
+                                    ))
+                                )}
                             </div>
                             <div className="card-info">
                                 <span className="card-title">{list.name}</span>
-                                <span className="card-count">{list.count}</span>
+                                <span className="card-count">{list.count || 0}</span>
                             </div>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </section>

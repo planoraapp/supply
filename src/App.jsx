@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Browse from './pages/Browse';
 import Admin from './pages/Admin';
+import Legal from './pages/Legal';
+import ProductDetail from './pages/ProductDetail';
 import './index.css';
 
 const Footer = () => (
@@ -72,7 +74,9 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={<Browse />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/about" element={<About />} />
+        <Route path="/legal" element={<Legal />} />
         <Route path="/inserir" element={<Admin />} />
         <Route path="*" element={<Home />} />
       </Routes>

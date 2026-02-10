@@ -142,3 +142,13 @@ export const getLists = async () => {
         return hardcodedLists;
     }
 };
+export const getProductById = async (id) => {
+    try {
+        const products = await getProducts();
+        // Try to find by id (string or number)
+        return products.find(p => p.id.toString() === id.toString());
+    } catch (error) {
+        console.error("Error fetching product by ID:", error);
+        return hardcodedProducts.find(p => p.id.toString() === id.toString());
+    }
+};

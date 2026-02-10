@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
     return (
-        <a href={product.url} className="product-card" target="_blank" rel="noopener noreferrer">
+        <Link to={`/product/${product.id}`} className="product-card">
             <div className="product-image-container">
                 {product.badge && (
                     <div className="staff-pick-badge">
@@ -40,7 +41,7 @@ const ProductCard = ({ product }) => {
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 };
 

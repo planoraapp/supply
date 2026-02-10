@@ -23,6 +23,7 @@ const Admin = () => {
     });
 
     const [lists, setLists] = useState([]);
+    const [feedback, setFeedback] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -44,12 +45,20 @@ const Admin = () => {
 
     useEffect(() => {
         if (user) {
-            const fetchLists = async () => {
-                const data = await getLists();
-                setLists(data);
+            const fetchData = async () => {
+                const listsData = await getLists();
+                setLists(listsData);
+
+                const feedbackSnapshot = await getDocs(collection(db, "feedback"));
+                const feedbackData = feedbackSnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setFeedback(feedbackData);
+
                 setLoading(false);
             };
-            fetchLists();
+            fetchData();
         }
     }, [user]);
 
@@ -92,6 +101,15 @@ const Admin = () => {
             setLists(prev => prev.filter(l => l.id !== id));
         } catch (error) {
             console.error("Error deleting list:", error);
+        }
+    };
+
+    const handleDeleteFeedback = async (id) => {
+        try {
+            await deleteDoc(doc(db, "feedback", id));
+            setFeedback(prev => prev.filter(f => f.id !== id));
+        } catch (error) {
+            console.error("Error deleting feedback:", error);
         }
     };
 
@@ -269,6 +287,26 @@ const Admin = () => {
                                 />
                                 <button className="btn-secondary" onClick={handleAddList}><Plus size={18} /></button>
                             </div>
+                        </div>
+                    </section>
+
+                    <section className="admin-section">
+                        <h2><Package size={20} /> Solicitações / Feedback</h2>
+                        <div className="feedback-manager">
+                            {feedback.length > 0 ? (
+                                feedback.map(item => (
+                                    <div key={item.id} className="feedback-item">
+                                        <div className="feedback-header">
+                                            <strong>{item.name}</strong>
+                                            <button className="text-secondary" onClick={() => handleDeleteFeedback(item.id)}><Trash size={12} /></button>
+                                        </div>
+                                        <span className="feedback-email">{item.email}</span>
+                                        <p className="feedback-msg">{item.message}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Nenhuma solicitação no momento.</p>
+                            )}
                         </div>
                     </section>
 

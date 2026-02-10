@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-color: rgb(245, 245, 245);
+  --card-bg: #fff;
+  --text-primary: rgb(20, 20, 20);
+  --text-secondary: rgb(115, 115, 115);
+  --border-color: rgb(226, 226, 226);
+  --pill-bg-active: #fff;
+  --pill-bg-inactive: rgb(242, 242, 242);
+  --accent-color: #000;
+  
+  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}

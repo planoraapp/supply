@@ -5,11 +5,17 @@ import {
     Sparkles,
     Star,
     Cpu,
-    Lamp,
     Home,
     Package,
     BookOpen,
     Heart,
+    Watch,
+    User,
+    Plane,
+    Camera,
+    Coffee,
+    Car,
+    Briefcase,
     Plus
 } from 'lucide-react';
 import './FilterBar.css';
@@ -19,11 +25,17 @@ const categories = [
     { label: 'Novos', icon: Sparkles },
     { label: 'Destaques', icon: Star },
     { label: 'Tech', icon: Cpu },
-    { label: 'Escritório', icon: Lamp },
+    { label: 'Escritório', icon: Briefcase },
     { label: 'Casa', icon: Home },
     { label: 'Acessórios', icon: Package },
+    { label: 'Relógios', icon: Watch },
+    { label: 'Cuidados', icon: User },
     { label: 'Livros', icon: BookOpen },
-    { label: 'Estilo de Vida', icon: Heart }
+    { label: 'Viagem', icon: Plane },
+    { label: 'Estilo de Vida', icon: Heart },
+    { label: 'Câmeras', icon: Camera },
+    { label: 'Café', icon: Coffee },
+    { label: 'Veículos', icon: Car }
 ];
 
 const FilterBar = ({ activeCategory, setActiveCategory }) => {

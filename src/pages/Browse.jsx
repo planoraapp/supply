@@ -10,9 +10,13 @@ const categories = [
     { name: 'Escritório', image: 'https://assets.curated.supply/Oakywood_Standing%20Desk%20Pro.webp', count: 180 },
     { name: 'Acessórios', image: 'https://assets.curated.supply/Nomad_%20Card%20Wallet.webp', count: 148 },
     { name: 'Relógios', image: 'https://assets.curated.supply/Rolex_Datejust.webp', count: 68 },
-    { name: 'Pessoal', image: 'https://assets.curated.supply/Aesop_Reverence%20Aromatique%20Hand%20Wash.webp', count: 30 },
+    { name: 'Cuidados', image: 'https://assets.curated.supply/Aesop_Reverence%20Aromatique%20Hand%20Wash.webp', count: 30 },
     { name: 'Livros', image: 'https://assets.curated.supply/LMS_Helvetica%20Forever.webp', count: 47 },
     { name: 'Viagem', image: 'https://assets.curated.supply/Away_The%20Large_%20Aluminium%20Edition.webp', count: 15 },
+    { name: 'Estilo de Vida', image: 'https://assets.curated.supply/Nike_Killshot%202.webp', count: 51 },
+    { name: 'Câmeras', image: 'https://assets.curated.supply/Leica%20M11.webp', count: 15 },
+    { name: 'Café', image: 'https://assets.curated.supply/xbloomstudio.webp', count: 32 },
+    { name: 'Veículos', image: 'https://assets.curated.supply/911.webp', count: 19 },
 ];
 
 const brands = [

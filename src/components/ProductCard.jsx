@@ -35,7 +35,12 @@ const ProductCard = ({ product }) => {
                 </div>
 
                 <div className="product-footer">
-                    <span className="product-price">{product.price}</span>
+                    <div className="price-container">
+                        <span className="product-price">{product.price}</span>
+                        {product.priceTier && (
+                            <span className="price-tier-tag">{product.priceTier}</span>
+                        )}
+                    </div>
                     <div className="product-link">
                         <ArrowUpRight size={20} />
                     </div>

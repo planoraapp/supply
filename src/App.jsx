@@ -8,6 +8,7 @@ import Browse from './pages/Browse';
 import Admin from './pages/Admin';
 import Legal from './pages/Legal';
 import ProductDetail from './pages/ProductDetail';
+import ListView from './pages/ListView';
 import './index.css';
 
 const Footer = () => (
@@ -48,14 +49,14 @@ const Footer = () => (
       <div>
         <h4 style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px', textTransform: 'uppercase' }}>Listas</h4>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <a href="/lists/office" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Home Office Goals</a>
-          <a href="/lists/coffee" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Cult of Coffee</a>
-          <a href="/lists/coffeetable" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>For Your Coffee Table</a>
-          <a href="/lists/audio" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Audiophile Core</a>
-          <a href="/lists/charging" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Charging Design</a>
-          <a href="/lists/everyday" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Nicer Everyday Objects</a>
-          <a href="/lists/desk" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Deskworthy</a>
-          <a href="/lists/athletes" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Athletes Only</a>
+          <a href="/lists/office" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Melhores para Escritório</a>
+          <a href="/lists/coffee" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Ritual do Grão</a>
+          <a href="/lists/coffeetable" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Essenciais</a>
+          <a href="/lists/audio" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Acústica</a>
+          <a href="/lists/charging" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Paredes e Decorações</a>
+          <a href="/lists/everyday" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Signature</a>
+          <a href="/lists/desk" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Para a Mesa de Centro</a>
+          <a href="/lists/athletes" style={{ color: 'var(--text-primary)', textDecoration: 'none' }}>Endorfina</a>
         </div>
       </div>
     </div>
@@ -69,6 +70,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/browse" element={<Browse />} />
+        <Route path="/lists/:slug" element={<ListView />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/about" element={<About />} />
         <Route path="/legal" element={<Legal />} />

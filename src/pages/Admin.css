@@ -74,6 +74,36 @@
     border-color: var(--accent-color);
 }
 
+.price-tier-selector {
+    display: flex;
+    gap: 8px;
+}
+
+.tier-btn {
+    flex: 1;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-secondary);
+}
+
+.tier-btn:hover {
+    background: #fafafa;
+    border-color: #ccc;
+}
+
+.tier-btn.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #22c55e;
+    /* Vibrant green for selection */
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -172,6 +202,202 @@
     font-size: 16px;
     font-weight: 500;
     margin: 4px 0;
+}
+
+.scraped-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+    padding: 12px;
+    background: #fdfdfd;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.scraped-img-item {
+    aspect-ratio: 1;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fff;
+}
+
+.scraped-img-item:hover {
+    border-color: var(--border-color);
+}
+
+.scraped-img-item.selected {
+    border-color: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+}
+
+.scraped-img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.admin-categories-browser {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.category-pill-admin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.category-pill-admin:hover {
+    border-color: var(--accent-color);
+    background: #fafafa;
+}
+
+.category-pill-admin.active {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+}
+
+.category-pill-admin.active .count-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.count-tag {
+    background: #f0f0f0;
+    color: var(--text-secondary);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.category-products-list {
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+    margin-top: 24px;
+}
+
+.category-products-list h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.admin-products-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-product-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.admin-product-row.is-archived {
+    opacity: 0.6;
+    background: #f9f9f9;
+}
+
+.prod-main-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.prod-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    background: #f5f5f5;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.prod-item-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.prod-item-brand {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.prod-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-secondary);
+}
+
+.action-btn:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+    color: var(--text-primary);
+}
+
+.action-btn.text-danger:hover {
+    background: #fff5f5;
+    border-color: #feb2b2;
+    color: #e53e3e;
+}
+
+.empty-msg {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+    font-size: 14px;
 }
 
 @media (max-width: 900px) {

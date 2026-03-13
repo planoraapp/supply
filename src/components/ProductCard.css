@@ -16,8 +16,8 @@
     width: 100%;
     aspect-ratio: 1 / 1;
     /* Square images as per layout */
-    background-color: #f9f9f9;
-    /* Fallback */
+    background-color: #fff;
+    /* Clean white background */
     overflow: hidden;
     position: relative;
 }

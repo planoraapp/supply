@@ -35,7 +35,7 @@ const About = () => {
 
                 <div className="about-text-section">
                     <p>
-                        O acervo. não é apenas uma lista de objetos; é uma resposta ao excesso. Na vida, o verdadeiro luxo contemporâneo não está no preço, mas na confiança de que cada escolha foi feita com critério.
+                        O acervo. não é apenas uma lista de objetos; é uma resposta ao excesso. Na vida contemporânea, o verdadeiro luxo não está no preço, mas na confiança de que cada escolha foi feita com critério.
                     </p>
 
                     <h3>Design com propósito</h3>
@@ -44,15 +44,15 @@ const About = () => {
                     </p>
 
                     <p>
-                        Seu tempo é o seu recurso mais escasso. Por isso, fizemos o trabalho difícil por você. O acervo. elimina a fadiga da decisão e o ruído da busca infinita.
+                        Seu tempo é o seu recurso mais escasso e valioso. Por isso, o acervo faz o trabalho difícil por você.
                     </p>
 
                     <p>
-                        Não queremos que você perca horas comparando especificações; queremos que você ganhe anos utilizando algo que foi própriamente planejado. Cada minuto que você não gasta procurando o objeto ideal é um minuto devolvido ao que realmente importa em sua vida.
+                        Deixe de perder horas comparando especificações; e ganhe anos utilizando algo que foi propriamente planejado. Cada minuto que você não gasta procurando o objeto ideal é um minuto devolvido ao que realmente importa em sua vida.
                     </p>
 
                     <p>
-                        Continue nos visitando, sempre há algo novo pra você conhecer.
+                        Visite sempre o acervo, sempre há algo novo pra você conhecer.
                     </p>
                 </div>
 

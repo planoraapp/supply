@@ -41,7 +41,16 @@ const ProductCard = ({ product }) => {
                             <span className="price-tier-tag">{product.priceTier}</span>
                         )}
                     </div>
-                    <div className="product-link">
+                    <div 
+                        className="product-link"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (product.url) {
+                                window.open(product.url, '_blank', 'noopener,noreferrer');
+                            }
+                        }}
+                    >
                         <ArrowUpRight size={20} />
                     </div>
                 </div>

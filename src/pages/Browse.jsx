@@ -16,7 +16,6 @@ const categories = [
     { name: 'Estilo de Vida', image: 'https://assets.curated.supply/Nike_Killshot%202.webp', count: 51 },
     { name: 'Câmeras', image: 'https://assets.curated.supply/Leica%20M11.webp', count: 15 },
     { name: 'Café', image: 'https://assets.curated.supply/xbloomstudio.webp', count: 32 },
-    { name: 'Veículos', image: 'https://assets.curated.supply/911.webp', count: 19 },
 ];
 
 const brands = [
@@ -87,7 +86,7 @@ const Browse = () => {
                 </div>
                 <div className="browse-grid categories-grid">
                     {categories.map((cat, index) => (
-                        <a href={`/categories/${cat.name.toLowerCase()}`} key={index} className="browse-card">
+                        <Link to={`/categories/${cat.name.toLowerCase()}`} key={index} className="browse-card">
                             <div className="card-image">
                                 <img src={cat.image} alt={cat.name} loading="lazy" />
                             </div>
@@ -95,7 +94,7 @@ const Browse = () => {
                                 <span className="card-title">{cat.name}</span>
                                 <span className="card-count">{cat.count}</span>
                             </div>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </section>
@@ -107,14 +106,14 @@ const Browse = () => {
                 </div>
                 <div className="browse-grid brands-grid">
                     {brands.map((brand, index) => (
-                        <a href={`/brands/${brand.name.toLowerCase()}`} key={index} className="browse-card brand-card">
+                        <Link to={`/brands/${brand.name.toLowerCase()}`} key={index} className="browse-card brand-card">
                             <div className="card-image brand-image">
                                 <img src={brand.image} alt={brand.name} loading="lazy" />
                             </div>
                             <div className="card-info brand-info">
                                 <span className="card-title">{brand.name}</span>
                             </div>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </section>

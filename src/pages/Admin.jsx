@@ -19,8 +19,7 @@ const PRODUCT_CATEGORIES = [
     { name: 'Viagem', icon: Plane, image: 'https://assets.curated.supply/Away_The%20Large_%20Aluminium%20Edition.webp' },
     { name: 'Estilo de Vida', icon: Heart, image: 'https://assets.curated.supply/Nike_Killshot%202.webp' },
     { name: 'Câmeras', icon: Camera, image: 'https://assets.curated.supply/Leica%20M11.webp' },
-    { name: 'Café', icon: Coffee, image: 'https://assets.curated.supply/xbloomstudio.webp' },
-    { name: 'Veículos', icon: Car, image: 'https://assets.curated.supply/911.webp' }
+    { name: 'Café', icon: Coffee, image: 'https://assets.curated.supply/xbloomstudio.webp' }
 ];
 
 const AUTHORIZED_EMAIL = "appplanora@gmail.com";
@@ -53,6 +52,9 @@ const Admin = () => {
     const [scrapedImages, setScrapedImages] = useState([]);
     const [fetchingImages, setFetchingImages] = useState(false);
     const [uploadingImage, setUploadingImage] = useState(false);
+    
+    // Novas abas: 'new' | 'inventory' | 'settings'
+    const [activeTab, setActiveTab ] = useState('new');
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -394,319 +396,376 @@ const Admin = () => {
 
     return (
         <div className="container admin-container">
-            <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <div>
-                    <h1>Painel Administrativo</h1>
-                    <p>Olá, {user.displayName} ({user.email}).</p>
+            <header className="admin-header">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
+                    <div>
+                        <h1>Painel Administrativo</h1>
+                        <p>Gerencie produtos, listas e categorias do acervo.</p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                        <div className="admin-user-info" style={{ textAlign: 'right', display: 'none' }}>
+                             <span style={{ fontSize: '13px', fontWeight: '500' }}>{user.displayName}</span>
+                        </div>
+                        <button onClick={handleLogout} className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <LogOut size={16} /> Sair
+                        </button>
+                    </div>
                 </div>
-                <button onClick={handleLogout} className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <LogOut size={16} /> Sair
-                </button>
+
+                <nav className="admin-tabs">
+                    <button 
+                        className={`admin-tab ${activeTab === 'new' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('new')}
+                    >
+                        <Plus size={18} /> {isEditing ? 'Editando Produto' : 'Inserir Novo'}
+                    </button>
+                    <button 
+                        className={`admin-tab ${activeTab === 'inventory' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('inventory')}
+                    >
+                        <Archive size={18} /> Exibir Acervo
+                    </button>
+                    <button 
+                        className={`admin-tab ${activeTab === 'settings' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('settings')}
+                    >
+                        <Edit2 size={18} /> Listas & Categorias
+                    </button>
+                </nav>
             </header>
 
             <div className="admin-grid">
                 <main className="admin-main">
-                    <section className="admin-section">
-                        <h2><Package size={20} /> {isEditing ? 'Editar Produto' : 'Novo Produto'}</h2>
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label>Título do Produto</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    value={product.title}
-                                    onChange={handleInputChange}
-                                    placeholder="Ex: Studio Display"
-                                    required
-                                />
-                            </div>
-
-                            <div className="form-row">
+                    {activeTab === 'new' && (
+                        <section className="admin-section fade-in">
+                            <h2><Package size={20} /> {isEditing ? 'Editar Detalhes' : 'Dados do Produto'}</h2>
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label>Marca</label>
+                                    <label>Título do Produto</label>
                                     <input
                                         type="text"
-                                        name="brand"
-                                        value={product.brand}
+                                        name="title"
+                                        value={product.title}
                                         onChange={handleInputChange}
-                                        placeholder="Ex: Apple"
+                                        placeholder="Ex: Studio Display"
                                         required
                                     />
                                 </div>
+
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label>Marca</label>
+                                        <input
+                                            type="text"
+                                            name="brand"
+                                            value={product.brand}
+                                            onChange={handleInputChange}
+                                            placeholder="Ex: Apple"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Categoria</label>
+                                        <select
+                                            name="category"
+                                            value={product.category}
+                                            onChange={handleInputChange}
+                                        >
+                                            {PRODUCT_CATEGORIES.map(cat => (
+                                                <option key={cat.name} value={cat.name}>{cat.name}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label>Preço</label>
+                                        <input
+                                            type="text"
+                                            name="price"
+                                            value={product.price}
+                                            onChange={handleInputChange}
+                                            placeholder="Ex: $1,599"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Faixa de Preço</label>
+                                        <div className="price-tier-selector">
+                                            {['$', '$$', '$$$'].map(tier => (
+                                                <button
+                                                    key={tier}
+                                                    type="button"
+                                                    className={`tier-btn ${product.priceTier === tier ? 'active' : ''}`}
+                                                    onClick={() => setProduct(prev => ({ ...prev, priceTier: tier }))}
+                                                >
+                                                    {tier}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="form-group">
-                                    <label>Categoria</label>
+                                    <label>Badge (Opcional)</label>
+                                    <input
+                                        type="text"
+                                        name="badge"
+                                        value={product.badge}
+                                        onChange={handleInputChange}
+                                        placeholder="Ex: Destaque"
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Vincular a uma Lista (Opcional)</label>
                                     <select
-                                        name="category"
-                                        value={product.category}
+                                        name="list"
+                                        value={product.list}
                                         onChange={handleInputChange}
                                     >
-                                        {PRODUCT_CATEGORIES.map(cat => (
-                                            <option key={cat.name} value={cat.name}>{cat.name}</option>
+                                        <option value="">Nenhuma lista</option>
+                                        {lists.map((l, idx) => (
+                                            <option key={l.id || l.slug || `list-opt-${idx}`} value={l.slug || l.id}>{l.name}</option>
                                         ))}
                                     </select>
                                 </div>
-                            </div>
 
-                            <div className="form-row">
                                 <div className="form-group">
-                                    <label>Preço</label>
-                                    <input
-                                        type="text"
-                                        name="price"
-                                        value={product.price}
-                                        onChange={handleInputChange}
-                                        placeholder="Ex: $1,599"
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Faixa de Preço</label>
-                                    <div className="price-tier-selector">
-                                        {['$', '$$', '$$$'].map(tier => (
-                                            <button
-                                                key={tier}
-                                                type="button"
-                                                className={`tier-btn ${product.priceTier === tier ? 'active' : ''}`}
-                                                onClick={() => setProduct(prev => ({ ...prev, priceTier: tier }))}
-                                            >
-                                                {tier}
-                                            </button>
-                                        ))}
+                                    <label><LinkIcon size={14} style={{ marginRight: '4px' }} /> Link do Produto</label>
+                                    <div style={{ display: 'flex', gap: '8px' }}>
+                                        <input
+                                            type="url"
+                                            name="url"
+                                            value={product.url}
+                                            onChange={handleInputChange}
+                                            onBlur={(e) => scrapeProductData(e.target.value)}
+                                            placeholder="https://..."
+                                            required
+                                            style={{ flex: 1 }}
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn-secondary"
+                                            onClick={() => scrapeProductData(product.url)}
+                                            disabled={fetchingImages}
+                                            style={{ width: 'auto', padding: '0 12px' }}
+                                        >
+                                            {fetchingImages ? <Loader2 size={16} className="animate-spin" /> : 'Buscar Dados'}
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="form-group">
-                                <label>Badge (Opcional)</label>
-                                <input
-                                    type="text"
-                                    name="badge"
-                                    value={product.badge}
-                                    onChange={handleInputChange}
-                                    placeholder="Ex: Destaque"
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label>Vincular a uma Lista (Opcional)</label>
-                                <select
-                                    name="list"
-                                    value={product.list}
-                                    onChange={handleInputChange}
-                                >
-                                    <option value="">Nenhuma lista</option>
-                                    {lists.map((l, idx) => (
-                                        <option key={l.id || l.slug || `list-opt-${idx}`} value={l.slug || l.id}>{l.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div className="form-group">
-                                <label><LinkIcon size={14} style={{ marginRight: '4px' }} /> Link do Produto</label>
-                                <div style={{ display: 'flex', gap: '8px' }}>
-                                    <input
-                                        type="url"
-                                        name="url"
-                                        value={product.url}
-                                        onChange={handleInputChange}
-                                        onBlur={(e) => scrapeProductData(e.target.value)}
-                                        placeholder="https://..."
-                                        required
-                                        style={{ flex: 1 }}
-                                    />
-                                    <button
-                                        type="button"
-                                        className="btn-secondary"
-                                        onClick={() => scrapeProductData(product.url)}
-                                        disabled={fetchingImages}
-                                        style={{ width: 'auto', padding: '0 12px' }}
-                                    >
-                                        {fetchingImages ? <Loader2 size={16} className="animate-spin" /> : 'Buscar Dados'}
-                                    </button>
-                                </div>
-                            </div>
-
-                            {scrapedImages.length > 0 && (
-                                <div className="form-group">
-                                    <label>Fotos encontradas (clique para selecionar)</label>
-                                    <div className="scraped-images-grid">
-                                        {scrapedImages.map((img, idx) => (
-                                            <div
-                                                key={idx}
-                                                className={`scraped-img-item ${product.image === img ? 'selected' : ''}`}
-                                                onClick={() => setProduct(prev => ({ ...prev, image: img }))}
-                                            >
-                                                <img src={img} alt="" />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            <div className="form-group">
-                                <label><ImageIcon size={14} style={{ marginRight: '4px' }} /> URL da Imagem</label>
-                                <div style={{ display: 'flex', gap: '8px' }}>
-                                    <input
-                                        type="url"
-                                        name="image"
-                                        value={product.image}
-                                        onChange={handleInputChange}
-                                        placeholder="https://..."
-                                        required
-                                        style={{ flex: 1 }}
-                                    />
-                                    <label className="btn-secondary" style={{ width: 'auto', padding: '0 12px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                                        {uploadingImage ? <Loader2 size={16} className="animate-spin" /> : <Upload size={16} />}
-                                        <input type="file" hidden onChange={handleImageUpload} accept="image/*" />
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-                                <label>Descrição do Produto (Sobre)</label>
-                                <textarea
-                                    name="about"
-                                    value={product.about}
-                                    onChange={handleInputChange}
-                                    placeholder="Descreva os detalhes, materiais e o que torna este produto especial..."
-                                    rows={4}
-                                />
-                            </div>
-
-                            <div style={{ display: 'flex', gap: '12px' }}>
-                                <button type="submit" className="btn-primary">
-                                    <Save size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
-                                    {isEditing ? 'Salvar Alterações' : 'Publicar Produto'}
-                                </button>
-                                {isEditing && (
-                                    <button type="button" onClick={cancelEdit} className="btn-secondary" style={{ width: 'auto' }}>
-                                        <X size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
-                                        Cancelar
-                                    </button>
-                                )}
-                            </div>
-                        </form>
-                    </section>
-
-                    <section className="admin-section">
-                        <h2><ListIcon size={20} /> Categorias do acervo.</h2>
-                        <div className="admin-categories-browser">
-                            {PRODUCT_CATEGORIES.map((cat, idx) => {
-                                const Icon = cat.icon;
-                                const count = allProducts.filter(p => p.category === cat.name).length;
-                                return (
-                                    <button
-                                        key={`cat-${cat.name}-${idx}`}
-                                        className={`category-pill-admin ${selectedCategory === cat.name ? 'active' : ''}`}
-                                        onClick={() => setSelectedCategory(selectedCategory === cat.name ? null : cat.name)}
-                                    >
-                                        <Icon size={16} />
-                                        <span>{cat.name}</span>
-                                        <span className="count-tag">{count}</span>
-                                    </button>
-                                );
-                            })}
-                        </div>
-
-                        {selectedCategory && (
-                            <div className="category-products-list">
-                                <h3>Gerenciando: {selectedCategory}</h3>
-                                {allProducts.filter(p => p.category === selectedCategory).length > 0 ? (
-                                    <div className="admin-products-table">
-                                        {allProducts
-                                            .filter(p => p.category === selectedCategory)
-                                            .map(item => (
-                                                <div key={item.id} className={`admin-product-row ${item.archived ? 'is-archived' : ''}`}>
-                                                    <div className="prod-main-info">
-                                                        <img src={item.image} alt="" className="prod-thumb" />
-                                                        <div>
-                                                            <div className="prod-item-title">{item.title}</div>
-                                                            <div className="prod-item-brand">{item.brand} • {item.price}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="prod-actions">
-                                                        <button
-                                                            title="Editar"
-                                                            onClick={() => handleEditProduct(item)}
-                                                            className="action-btn"
-                                                        >
-                                                            <Edit2 size={14} />
-                                                        </button>
-                                                        <button
-                                                            title={item.archived ? "Desarquivar" : "Arquivar"}
-                                                            onClick={() => handleArchiveProduct(item.id, item.archived)}
-                                                            className="action-btn"
-                                                        >
-                                                            <Archive size={14} color={item.archived ? "var(--accent-color)" : "currentColor"} />
-                                                        </button>
-                                                        <button
-                                                            title="Excluir"
-                                                            onClick={() => handleDeleteProduct(item.id)}
-                                                            className="action-btn text-danger"
-                                                        >
-                                                            <Trash size={14} />
-                                                        </button>
-                                                    </div>
+                                {scrapedImages.length > 0 && (
+                                    <div className="form-group">
+                                        <label>Fotos encontradas (clique para selecionar)</label>
+                                        <div className="scraped-images-grid">
+                                            {scrapedImages.map((img, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    className={`scraped-img-item ${product.image === img ? 'selected' : ''}`}
+                                                    onClick={() => setProduct(prev => ({ ...prev, image: img }))}
+                                                >
+                                                    <img src={img} alt="" />
                                                 </div>
                                             ))}
+                                        </div>
                                     </div>
-                                ) : (
-                                    <p className="empty-msg">Nenhum produto cadastrado nesta categoria.</p>
                                 )}
+
+                                <div className="form-group">
+                                    <label><ImageIcon size={14} style={{ marginRight: '4px' }} /> URL da Imagem</label>
+                                    <div style={{ display: 'flex', gap: '8px' }}>
+                                        <input
+                                            type="url"
+                                            name="image"
+                                            value={product.image}
+                                            onChange={handleInputChange}
+                                            placeholder="https://..."
+                                            required
+                                            style={{ flex: 1 }}
+                                        />
+                                        <label className="btn-secondary" style={{ width: 'auto', padding: '0 12px', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                                            {uploadingImage ? <Loader2 size={16} className="animate-spin" /> : <Upload size={16} />}
+                                            <input type="file" hidden onChange={handleImageUpload} accept="image/*" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label>Descrição do Produto (Sobre)</label>
+                                    <textarea
+                                        name="about"
+                                        value={product.about}
+                                        onChange={handleInputChange}
+                                        placeholder="Descreva os detalhes, materiais e o que torna este produto especial..."
+                                        rows={4}
+                                    />
+                                </div>
+
+                                <div style={{ display: 'flex', gap: '12px' }}>
+                                    <button type="submit" className="btn-primary">
+                                        <Save size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+                                        {isEditing ? 'Salvar Alterações' : 'Publicar Produto'}
+                                    </button>
+                                    {isEditing && (
+                                        <button type="button" onClick={cancelEdit} className="btn-secondary" style={{ width: 'auto' }}>
+                                            <X size={18} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+                                            Cancelar
+                                        </button>
+                                    )}
+                                </div>
+                            </form>
+                        </section>
+                    )}
+
+                    {activeTab === 'inventory' && (
+                        <section className="admin-section fade-in">
+                            <h2><Archive size={20} /> Acervo por Categorias</h2>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '14px' }}>Selecione uma categoria para visualizar e gerenciar os produtos cadastrados.</p>
+                            
+                            <div className="admin-categories-browser">
+                                {PRODUCT_CATEGORIES.map((cat, idx) => {
+                                    const Icon = cat.icon;
+                                    const count = allProducts.filter(p => p.category === cat.name).length;
+                                    return (
+                                        <button
+                                            key={`cat-${cat.name}-${idx}`}
+                                            className={`category-pill-admin ${selectedCategory === cat.name ? 'active' : ''}`}
+                                            onClick={() => setSelectedCategory(selectedCategory === cat.name ? null : cat.name)}
+                                        >
+                                            <Icon size={16} />
+                                            <span>{cat.name}</span>
+                                            <span className="count-tag">{count}</span>
+                                        </button>
+                                    );
+                                })}
                             </div>
-                        )}
-                    </section>
+
+                            {selectedCategory && (
+                                <div className="category-products-list anim-up">
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                                        <h3 style={{ margin: 0 }}>Gerenciando: {selectedCategory}</h3>
+                                        <span className="count-tag large">{allProducts.filter(p => p.category === selectedCategory).length} itens</span>
+                                    </div>
+                                    
+                                    {allProducts.filter(p => p.category === selectedCategory).length > 0 ? (
+                                        <div className="admin-products-table">
+                                            {allProducts
+                                                .filter(p => p.category === selectedCategory)
+                                                .map(item => (
+                                                    <div key={item.id} className={`admin-product-row ${item.archived ? 'is-archived' : ''}`}>
+                                                        <div className="prod-main-info">
+                                                            <img src={item.image} alt="" className="prod-thumb" />
+                                                            <div>
+                                                                <div className="prod-item-title">{item.title}</div>
+                                                                <div className="prod-item-brand">{item.brand} • {item.price}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="prod-actions">
+                                                            <button
+                                                                title="Editar"
+                                                                onClick={() => {
+                                                                    handleEditProduct(item);
+                                                                    setActiveTab('new');
+                                                                }}
+                                                                className="action-btn"
+                                                            >
+                                                                <Edit2 size={14} />
+                                                            </button>
+                                                            <button
+                                                                title={item.archived ? "Desarquivar" : "Arquivar"}
+                                                                onClick={() => handleArchiveProduct(item.id, item.archived)}
+                                                                className="action-btn"
+                                                            >
+                                                                <Archive size={14} color={item.archived ? "var(--accent-color)" : "currentColor"} />
+                                                            </button>
+                                                            <button
+                                                                title="Excluir"
+                                                                onClick={() => handleDeleteProduct(item.id)}
+                                                                className="action-btn text-danger"
+                                                            >
+                                                                <Trash size={14} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    ) : (
+                                        <p className="empty-msg">Nenhum produto cadastrado nesta categoria.</p>
+                                    )}
+                                </div>
+                            )}
+                        </section>
+                    )}
+
+                    {activeTab === 'settings' && (
+                        <div className="fade-in">
+                            <section className="admin-section">
+                                <h2><ListIcon size={20} /> Gerenciar Listas existentes</h2>
+                                <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '14px' }}>Adicione ou remova as coleções que aparecem na página Browse.</p>
+                                
+                                <div className="list-manager-grid">
+                                    {lists.map((list, idx) => (
+                                        <div key={list.id || `list-${idx}`} className="list-manager-card">
+                                            <div className="list-card-details">
+                                                <span className="list-name">{list.name}</span>
+                                                <span className="list-count">{list.count || 0} produtos vinculados</span>
+                                            </div>
+                                            <div style={{ display: 'flex', gap: '8px' }}>
+                                                <button className="action-btn" title="Editar Nome" onClick={() => {
+                                                    const name = prompt("Novo nome para a lista:", list.name);
+                                                    if (name) {
+                                                        // Update code if we had updateList function
+                                                        alert("Funcionalidade em desenvolvimento");
+                                                    }
+                                                }}><Edit2 size={14} /></button>
+                                                <button className="action-btn text-danger" onClick={() => handleDeleteList(list.id)}><Trash size={14} /></button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="add-new-list-box">
+                                    <input
+                                        type="text"
+                                        placeholder="Nome da nova lista (ex: Minimalismo)"
+                                        value={newListName}
+                                        onChange={(e) => setNewListName(e.target.value)}
+                                    />
+                                    <button className="btn-primary" style={{ width: 'auto' }} onClick={handleAddList}>
+                                        <Plus size={18} /> Criar Lista
+                                    </button>
+                                </div>
+                            </section>
+
+                            <section className="admin-section">
+                                <h2><Archive size={20} /> Categorias e Ícones</h2>
+                                <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '14px' }}>Atualmente as categorias são fixas no código, mas aqui você pode ver a contagem e os ícones associados.</p>
+                                <div className="categories-config-list">
+                                    {PRODUCT_CATEGORIES.map((cat, idx) => {
+                                        const Icon = cat.icon;
+                                        return (
+                                            <div key={idx} className="category-config-item">
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                    <div className="category-icon-preview"><Icon size={20} /></div>
+                                                    <div>
+                                                        <div style={{ fontWeight: '600' }}>{cat.name}</div>
+                                                        <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>ID: {cat.name.toLowerCase()}</div>
+                                                    </div>
+                                                </div>
+                                                <button className="btn-secondary" disabled>Configurar</button>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        </div>
+                    )}
                 </main>
 
                 <aside className="admin-sidebar">
-                    <section className="admin-section">
-                        <h2><ListIcon size={20} /> Listas / Coleções</h2>
-                        <div className="list-manager">
-                            {lists.map((list, idx) => (
-                                <div key={list.id || `list-${idx}`} className="list-manager-item">
-                                    <div className="list-info">
-                                        <span className="list-name">{list.name}</span>
-                                        <span className="list-count">{list.count || 0} produtos</span>
-                                    </div>
-                                    <button className="text-secondary" onClick={() => handleDeleteList(list.id)}><Trash size={14} /></button>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="form-group" style={{ marginTop: '24px', marginBottom: '0' }}>
-                            <div style={{ display: 'flex', gap: '8px' }}>
-                                <input
-                                    type="text"
-                                    placeholder="Nova lista..."
-                                    value={newListName}
-                                    onChange={(e) => setNewListName(e.target.value)}
-                                    style={{ padding: '8px 12px' }}
-                                />
-                                <button className="btn-secondary" onClick={handleAddList}><Plus size={18} /></button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="admin-section">
-                        <h2><Package size={20} /> Solicitações / Feedback</h2>
-                        <div className="feedback-manager">
-                            {feedback.length > 0 ? (
-                                feedback.map((item, idx) => (
-                                    <div key={item.id || `fb-${idx}`} className="feedback-item">
-                                        <div className="feedback-header">
-                                            <strong>{item.name}</strong>
-                                            <button className="text-secondary" onClick={() => handleDeleteFeedback(item.id)}><Trash size={12} /></button>
-                                        </div>
-                                        <span className="feedback-email">{item.email}</span>
-                                        <p className="feedback-msg">{item.message}</p>
-                                    </div>
-                                ))
-                            ) : (
-                                <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Nenhuma solicitação no momento.</p>
-                            )}
-                        </div>
-                    </section>
-
-                    <section className="admin-section">
+                    <section className="admin-section compact">
                         <h2>Prévia</h2>
                         <div className="preview-card-compact">
                             <div className="preview-image">
@@ -721,6 +780,25 @@ const Admin = () => {
                                 <h3 className="preview-title">{product.title || 'Título do Produto'}</h3>
                                 <div className="preview-price" style={{ fontWeight: '600' }}>{product.price || '$0'}</div>
                             </div>
+                        </div>
+                    </section>
+                    
+                    <section className="admin-section compact">
+                        <h2><Package size={20} /> Feedback</h2>
+                        <div className="feedback-manager">
+                            {feedback.length > 0 ? (
+                                feedback.slice(0, 5).map((item, idx) => (
+                                    <div key={item.id || `fb-${idx}`} className="feedback-item">
+                                        <div className="feedback-header">
+                                            <strong>{item.name}</strong>
+                                            <button className="text-secondary" onClick={() => handleDeleteFeedback(item.id)}><X size={12} /></button>
+                                        </div>
+                                        <p className="feedback-msg-compact">{item.message}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>Sem solicitações.</p>
+                            )}
                         </div>
                     </section>
                 </aside>
